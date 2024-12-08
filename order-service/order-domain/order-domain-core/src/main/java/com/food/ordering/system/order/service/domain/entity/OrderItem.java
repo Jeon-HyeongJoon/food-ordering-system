@@ -3,6 +3,7 @@ package com.food.ordering.system.order.service.domain.entity;
 import com.food.ordering.system.domain.entity.BaseEntity;
 import com.food.ordering.system.domain.valueobject.Money;
 import com.food.ordering.system.domain.valueobject.OrderId;
+import com.food.ordering.system.domain.valueobject.ProductId;
 import com.food.ordering.system.order.service.domain.valueobject.OrderItemId;
 
 import java.util.UUID;
@@ -45,6 +46,10 @@ public class OrderItem extends BaseEntity<OrderItemId> {
         return product;
     }
 
+    public ProductId getProductId() {
+        return product.getId();
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -56,10 +61,6 @@ public class OrderItem extends BaseEntity<OrderItemId> {
     public Money getSubTotal() {
         return subTotal;
     }
-
-//    public UUID getProductId() {
-//        return product.getId();
-//    }
 
     public static final class Builder {
         private OrderItemId orderItemId;

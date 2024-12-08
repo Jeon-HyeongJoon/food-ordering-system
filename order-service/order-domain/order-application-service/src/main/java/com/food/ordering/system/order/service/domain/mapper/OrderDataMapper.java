@@ -26,7 +26,7 @@ public class OrderDataMapper {
         return Restaurant.builder()
                 .restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
                 .products(createOrderCommand.getItems().stream().map(orderItem ->
-                        new Product(new ProductId(orderItem.getProductId())))
+                        new Product(new ProductId(orderItem.getProductId().getValue())))
                         .collect(Collectors.toList())
                 )
                 .build();
@@ -53,10 +53,10 @@ public class OrderDataMapper {
         return orderItems.stream()
                 .map(orderItem ->
                         OrderItem.builder()
-                                .product(new Product(new ProductId(orderItem.getProductId())))
-                                .price(new Money(orderItem.getPrice()))
+                                .product(new Product(new ProductId(orderItem.getProductId().getValue())))
+                                .price(new Money(orderItem.getPrice().getAmount()))
                                 .quantity(orderItem.getQuantity())
-                                .subTotal(new Money(orderItem.getSubTotal()))
+                                .subTotal(new Money(orderItem.getSubTotal().getAmount()))
                                 .build()).collect(Collectors.toList());
     }
 
