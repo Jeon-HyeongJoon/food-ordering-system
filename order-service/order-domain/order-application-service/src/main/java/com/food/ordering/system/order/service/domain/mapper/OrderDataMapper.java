@@ -1,9 +1,6 @@
 package com.food.ordering.system.order.service.domain.mapper;
 
-import com.food.ordering.system.domain.valueobject.CustomerId;
-import com.food.ordering.system.domain.valueobject.Money;
-import com.food.ordering.system.domain.valueobject.ProductId;
-import com.food.ordering.system.domain.valueobject.RestaurantId;
+import com.food.ordering.system.domain.valueobject.*;
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderCommand;
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderResponse;
 import com.food.ordering.system.order.service.domain.dto.create.OrderAddress;
@@ -12,7 +9,6 @@ import com.food.ordering.system.order.service.domain.entity.OrderItem;
 import com.food.ordering.system.order.service.domain.entity.Product;
 import com.food.ordering.system.order.service.domain.entity.Restaurant;
 import com.food.ordering.system.order.service.domain.valueobject.StreetAddress;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -26,9 +22,8 @@ public class OrderDataMapper {
         return Restaurant.builder()
                 .restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
                 .products(createOrderCommand.getItems().stream().map(orderItem ->
-                        new Product(new ProductId(orderItem.getProductId().getValue())))
-                        .collect(Collectors.toList())
-                )
+                        new Product(new ProductId(orderItem.getProductId())))
+                        .collect(Collectors.toList()))
                 .build();
     }
 
@@ -49,14 +44,16 @@ public class OrderDataMapper {
                 .build();
     }
 
-    private List<OrderItem> orderItemsToOrderItemEntities(@NotNull List<OrderItem> orderItems) {
+    private List<OrderItem> orderItemsToOrderItemEntities(
+            List<com.food.ordering.system.order.service.domain.dto.create.OrderItem> orderItems
+    ) {
         return orderItems.stream()
                 .map(orderItem ->
                         OrderItem.builder()
-                                .product(new Product(new ProductId(orderItem.getProductId().getValue())))
-                                .price(new Money(orderItem.getPrice().getAmount()))
+                                .product(new Product(new ProductId(orderItem.getProductId())))
+                                .price(new Money(orderItem.getPrice()))
                                 .quantity(orderItem.getQuantity())
-                                .subTotal(new Money(orderItem.getSubTotal().getAmount()))
+                                .subTotal(new Money(orderItem.getSubTotal()))
                                 .build()).collect(Collectors.toList());
     }
 

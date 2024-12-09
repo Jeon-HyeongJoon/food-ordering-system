@@ -6,8 +6,6 @@ import com.food.ordering.system.domain.valueobject.OrderId;
 import com.food.ordering.system.domain.valueobject.ProductId;
 import com.food.ordering.system.order.service.domain.valueobject.OrderItemId;
 
-import java.util.UUID;
-
 public class OrderItem extends BaseEntity<OrderItemId> {
     private OrderId orderId;
     private final Product product;
@@ -44,10 +42,6 @@ public class OrderItem extends BaseEntity<OrderItemId> {
 
     public Product getProduct() {
         return product;
-    }
-
-    public ProductId getProductId() {
-        return product.getId();
     }
 
     public int getQuantity() {
