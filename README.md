@@ -1,5 +1,7 @@
 <h2>Food Ordering System</h2>
+
 - common : 공용 모듈
+
 - infrastructure : kafka & zookeeper
 
 - order-service : 주문 서비스
