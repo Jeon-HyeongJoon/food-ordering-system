@@ -9,7 +9,7 @@
   - 주문 조회
     
 - customer-service : 고객 서비스
-  
+  - 고객 데이터 생성
   
 - restaurant-service : 식당 서비스
   - 주문 승인
